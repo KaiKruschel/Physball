@@ -121,45 +121,42 @@ function love.update(dt)
 
   -- paddle 1
   if love.keyboard.isDown("w") then
-    objects.paddle1.body:applyForce(0, -4000)
+    objects.paddle1.body:applyForce(0, -8000)
   elseif love.keyboard.isDown("s") then
-    objects.paddle1.body:applyForce(0, 4000)
+    objects.paddle1.body:applyForce(0, 8000)
   end
   if love.keyboard.isDown("a") then
-    objects.paddle1.body:applyForce(-2000, 0)
+    objects.paddle1.body:applyForce(-8000, 0)
   elseif love.keyboard.isDown("d") then
-    objects.paddle1.body:applyForce(2000, 0)
+    objects.paddle1.body:applyForce(8000, 0)
   end
   if love.keyboard.isDown("q") then
-    objects.paddle1.body:applyTorque(-40000) -- twist it counter clockwise
+    objects.paddle1.body:applyTorque(-60000) -- twist it counter clockwise
   elseif love.keyboard.isDown("e") then
-    objects.paddle1.body:applyTorque(40000) -- twist clockwise
+    objects.paddle1.body:applyTorque(60000) -- twist clockwise
   end
 
   -- paddle 2
   if love.keyboard.isDown("up") then
-    objects.paddle2.body:applyForce(0, -4000)
+    objects.paddle2.body:applyForce(0, -8000)
   elseif love.keyboard.isDown("down") then
-    objects.paddle2.body:applyForce(0, 4000)
+    objects.paddle2.body:applyForce(0, 8000)
   end
   if love.keyboard.isDown("left") then
-    objects.paddle2.body:applyForce(-2000, 0)
+    objects.paddle2.body:applyForce(-8000, 0)
   elseif love.keyboard.isDown("right") then
-    objects.paddle2.body:applyForce(2000, 0)
+    objects.paddle2.body:applyForce(8000, 0)
   end
   if love.keyboard.isDown("n") then
-    objects.paddle2.body:applyTorque(-40000) -- twist it counter clockwise
+    objects.paddle2.body:applyTorque(-60000) -- twist it counter clockwise
   elseif love.keyboard.isDown("m") then
-    objects.paddle2.body:applyTorque(40000) -- twist clockwise
+    objects.paddle2.body:applyTorque(60000) -- twist clockwise
   end
 
-  if love.keyboard.isDown(" ") then
-    objects.ball.body:applyForce(800, 800)
-  end
 end
 
 function scoring (object_1, object_2, contact)
-  print("Object 1: " .. object_1:getCategory() .. " Object 2: " .. object_2:getCategory())
+  -- print("Object 1: " .. object_1:getCategory() .. " Object 2: " .. object_2:getCategory())
   if (object_1:getCategory() + object_2:getCategory() == 6) then -- ball plus left wall
     score[2] = score[2] + 1
   elseif (object_1:getCategory() + object_2:getCategory() == 7) then -- ball plus right wall
