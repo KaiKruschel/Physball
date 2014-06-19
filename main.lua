@@ -64,25 +64,49 @@ function love.load()
     objects.top.body = love.physics.newBody(world, screen_width/2, 0, "static")
     objects.top.shape = love.physics.newRectangleShape(screen_width, 5)
     objects.top.fixture = love.physics.newFixture(objects.top.body, objects.top.shape)
-    objects.top.fixture:setCategory(3)
+    objects.top.fixture:setCategory(4)
 
     objects.bottom = {}
     objects.bottom.body = love.physics.newBody(world, screen_width/2, screen_height, "static")
     objects.bottom.shape = love.physics.newRectangleShape(screen_width, 5)
     objects.bottom.fixture = love.physics.newFixture(objects.bottom.body, objects.bottom.shape)
-    objects.bottom.fixture:setCategory(3)
+    objects.bottom.fixture:setCategory(4)
+
+    objects.left_top = {}
+    objects.left_top.body = love.physics.newBody(world, 10, 85, "static")
+    objects.left_top.shape = love.physics.newRectangleShape(20, 170)
+    objects.left_top.fixture = love.physics.newFixture(objects.left_top.body, objects.left_top.shape)
+    objects.left_top.fixture:setCategory(4)
+
+    objects.left_bottom= {}
+    objects.left_bottom.body = love.physics.newBody(world, 10, 530, "static")
+    objects.left_bottom.shape = love.physics.newRectangleShape(20, 170)
+    objects.left_bottom.fixture = love.physics.newFixture(objects.left_bottom.body, objects.left_bottom.shape)
+    objects.left_bottom.fixture:setCategory(4)
+
+    objects.right_top = {}
+    objects.right_top.body = love.physics.newBody(world, screen_width - 10, 85, "static")
+    objects.right_top.shape = love.physics.newRectangleShape(20, 170)
+    objects.right_top.fixture = love.physics.newFixture(objects.right_top.body, objects.right_top.shape)
+    objects.right_top.fixture:setCategory(4)
+
+    objects.right_bottom= {}
+    objects.right_bottom.body = love.physics.newBody(world, screen_width - 10, 530, "static")
+    objects.right_bottom.shape = love.physics.newRectangleShape(20, 170)
+    objects.right_bottom.fixture = love.physics.newFixture(objects.right_bottom.body, objects.right_bottom.shape)
+    objects.right_bottom.fixture:setCategory(4)
 
     objects.left = {}
     objects.left.body = love.physics.newBody(world, 0, screen_height/2, "static")
     objects.left.shape = love.physics.newRectangleShape(5, screen_height)
     objects.left.fixture = love.physics.newFixture(objects.left.body, objects.left.shape)
-    objects.left.fixture:setCategory(4)
+    objects.left.fixture:setCategory(5)
 
     objects.right = {}
     objects.right.body = love.physics.newBody(world, screen_width, screen_height/2, "static")
     objects.right.shape = love.physics.newRectangleShape(5, screen_height)
     objects.right.fixture = love.physics.newFixture(objects.right.body, objects.right.shape)
-    objects.right.fixture:setCategory(5)
+    objects.right.fixture:setCategory(7)
 
   -- initial graphics setup
   love.graphics.setBackgroundColor(104, 136, 248)
@@ -107,11 +131,15 @@ function love.draw()
   love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
 
   -- boundaries
-  love.graphics.setColor(0, 0, 0)
+  love.graphics.setColor(50, 50, 50)
   love.graphics.polygon("fill", objects.top.body:getWorldPoints(objects.top.shape:getPoints()))
   love.graphics.polygon("fill", objects.bottom.body:getWorldPoints(objects.bottom.shape:getPoints()))
   love.graphics.polygon("fill", objects.left.body:getWorldPoints(objects.left.shape:getPoints()))
   love.graphics.polygon("fill", objects.right.body:getWorldPoints(objects.right.shape:getPoints()))
+  love.graphics.polygon("fill", objects.left_top.body:getWorldPoints(objects.left_top.shape:getPoints()))
+  love.graphics.polygon("fill", objects.left_bottom.body:getWorldPoints(objects.left_bottom.shape:getPoints()))
+  love.graphics.polygon("fill", objects.right_top.body:getWorldPoints(objects.right_top.shape:getPoints()))
+  love.graphics.polygon("fill", objects.right_bottom.body:getWorldPoints(objects.right_bottom.shape:getPoints()))
 
   -- score
   love.graphics.setColor(0, 0, 0)
@@ -129,45 +157,45 @@ function love.update(dt)
 
   -- paddle 1
   if love.keyboard.isDown("w") then
-    objects.paddle1.body:applyForce(0, -8000)
+    objects.paddle1.body:applyForce(0, -15000)
   elseif love.keyboard.isDown("s") then
-    objects.paddle1.body:applyForce(0, 8000)
+    objects.paddle1.body:applyForce(0, 15000)
   end
   if love.keyboard.isDown("a") then
-    objects.paddle1.body:applyForce(-8000, 0)
+    objects.paddle1.body:applyForce(-14000, 0)
   elseif love.keyboard.isDown("d") then
-    objects.paddle1.body:applyForce(8000, 0)
+    objects.paddle1.body:applyForce(14000, 0)
   end
   if love.keyboard.isDown("q") then
-    objects.paddle1.body:applyTorque(-60000) -- twist it counter clockwise
+    objects.paddle1.body:applyTorque(-80000) -- twist it counter clockwise
   elseif love.keyboard.isDown("e") then
-    objects.paddle1.body:applyTorque(60000) -- twist clockwise
+    objects.paddle1.body:applyTorque(80000) -- twist clockwise
   end
 
   -- paddle 2
   if love.keyboard.isDown("up") then
-    objects.paddle2.body:applyForce(0, -8000)
+    objects.paddle2.body:applyForce(0, -15000)
   elseif love.keyboard.isDown("down") then
-    objects.paddle2.body:applyForce(0, 8000)
+    objects.paddle2.body:applyForce(0, 15000)
   end
   if love.keyboard.isDown("left") then
-    objects.paddle2.body:applyForce(-8000, 0)
+    objects.paddle2.body:applyForce(-15000, 0)
   elseif love.keyboard.isDown("right") then
-    objects.paddle2.body:applyForce(8000, 0)
+    objects.paddle2.body:applyForce(15000, 0)
   end
   if love.keyboard.isDown("n") then
-    objects.paddle2.body:applyTorque(-60000) -- twist it counter clockwise
+    objects.paddle2.body:applyTorque(-80000) -- twist it counter clockwise
   elseif love.keyboard.isDown("m") then
-    objects.paddle2.body:applyTorque(60000) -- twist clockwise
+    objects.paddle2.body:applyTorque(80000) -- twist clockwise
   end
 
 end
 
 function scoring (object_1, object_2, contact)
-  if ( object_1:getCategory() + object_2:getCategory() == 6 ) then -- ball plus left wall
+  if ( object_1:getCategory() + object_2:getCategory() == 7 ) then -- ball plus left wall
     score[2] = score[2] + 1
     do_reset = true
-  elseif ( object_1:getCategory() + object_2:getCategory() == 7 ) then -- ball plus right wall
+  elseif ( object_1:getCategory() + object_2:getCategory() == 9 ) then -- ball plus right wall
     score[1] = score[1] +1
     do_reset = true
   end
