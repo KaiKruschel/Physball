@@ -21,11 +21,13 @@ function love.load()
                                    -- otherwise it would be love.graphics.newFont(file, size)
   score = {0; 0}
 
+  do_reset = false
+
 
   -- set up physics
   love.physics.setMeter(20)
   world = love.physics.newWorld(0, 0, false) -- horizontal gravity, vertical gravity and wether objects are allowed to sleep
-  world:setCallbacks( scoring )
+  world:setCallbacks( scoring ) -- scoring is a callback that gets called whenever a collision happens
 
   objects = {}
 
@@ -36,6 +38,8 @@ function love.load()
     objects.paddle1.fixture = love.physics.newFixture(objects.paddle1.body, objects.paddle1.shape, 10)
     objects.paddle1.fixture:setRestitution(0.4)
     objects.paddle1.fixture:setCategory(1) -- put it in the paddle category
+    objects.paddle1.body:setAngularDamping(1.5) -- how fast spinning stops
+    objects.paddle1.body:setLinearDamping(0.8) -- how fast directional movement stops
 
     objects.paddle2 = {}
     objects.paddle2.body = love.physics.newBody(world, screen_width - 20, screen_height/2, "dynamic")
@@ -43,13 +47,15 @@ function love.load()
     objects.paddle2.fixture = love.physics.newFixture(objects.paddle2.body, objects.paddle2.shape, 10)
     objects.paddle2.fixture:setRestitution(0.4)
     objects.paddle2.fixture:setCategory(1)
+    objects.paddle2.body:setAngularDamping(1.5) -- how fast spinning stops
+    objects.paddle2.body:setLinearDamping(0.8) -- how fast directional movement stops
 
     -- ball
     objects.ball = {}
     objects.ball.body = love.physics.newBody(world, screen_width/2, screen_height/2, "dynamic")
     objects.ball.shape = love.physics.newCircleShape(ball_radius)
     objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1)
-    objects.ball.fixture:setRestitution(0.9)
+    objects.ball.fixture:setRestitution(0.9) -- bouncyness
     objects.ball.fixture:setCategory(2) -- ball category
 
 
@@ -87,8 +93,6 @@ end
 
 function love.draw()
 
-  -- border
-
 
   -- paddle 1
   love.graphics.setColor(255, 255, 255)
@@ -118,6 +122,10 @@ end
 function love.update(dt)
 
   world:update(dt)
+  if do_reset then
+    reset()
+    do_reset = false
+  end
 
   -- paddle 1
   if love.keyboard.isDown("w") then
@@ -156,10 +164,26 @@ function love.update(dt)
 end
 
 function scoring (object_1, object_2, contact)
-  -- print("Object 1: " .. object_1:getCategory() .. " Object 2: " .. object_2:getCategory())
-  if (object_1:getCategory() + object_2:getCategory() == 6) then -- ball plus left wall
+  if ( object_1:getCategory() + object_2:getCategory() == 6 ) then -- ball plus left wall
     score[2] = score[2] + 1
-  elseif (object_1:getCategory() + object_2:getCategory() == 7) then -- ball plus right wall
+    do_reset = true
+  elseif ( object_1:getCategory() + object_2:getCategory() == 7 ) then -- ball plus right wall
     score[1] = score[1] +1
+    do_reset = true
   end
+end
+
+function reset()
+  objects.paddle1.body:setPosition( 20, screen_height/2 )
+  objects.paddle1.body:setLinearVelocity( 0, 0 )
+  objects.paddle1.body:setAngularVelocity( 0 )
+  objects.paddle1.body:setAngle( 0 )
+
+  objects.paddle2.body:setPosition( screen_width - 20, screen_height/2 )
+  objects.paddle2.body:setLinearVelocity( 0, 0 )
+  objects.paddle2.body:setAngularVelocity( 0 )
+  objects.paddle2.body:setAngle( 0 )
+
+  objects.ball.body:setPosition( screen_width/2, screen_height/2 )
+  objects.ball.body:setLinearVelocity( 0, 0 )
 end
