@@ -8,6 +8,10 @@ function menu:init()
 
 end
 
+function menu:enter()
+	love.graphics.setBackgroundColor(104, 136, 248)
+end
+
 function menu:draw()
 	love.graphics.print("Press Enter to start game", 10, 10)
 end

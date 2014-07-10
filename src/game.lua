@@ -43,8 +43,15 @@ function game:update(dt)
 
 end
 
+function game:keyreleased(key, code)
+	if (key == 'escape') then
+		Gamestate.switch(pause)
+	end
+end
 
 function game:draw()
+
+  love.graphics.setBackgroundColor(0, 204, 0)
 
 	-- paddle
   paddle1:draw()
