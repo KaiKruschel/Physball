@@ -6,7 +6,7 @@ function pause:init()
 
 end
 
-function pause.draw()
+function pause:draw()
 	love.graphics.setBackgroundColor(255, 0, 127)
 	love.graphics.print("press Return to get back to the game or Escape to go to the game menu")
 end
@@ -21,6 +21,6 @@ function pause:keyreleased(key, code)
 	end
 end
 
-function menu:update(dt)
+function pause:update(dt)
 
 end

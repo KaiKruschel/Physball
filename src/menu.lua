@@ -3,12 +3,28 @@ menu = {}
 
 function menu:init()
 
-  love.graphics.setBackgroundColor(104, 136, 248)
 	print("Menu initialized")
+	--[[
+	loveframe
+	make a frame
+	make three buttons
+	-start game
+		switch to gamestate game
+	-options
+		switch to gamestate options
+	-exit
+		exit game
+	]]
 
 end
 
 function menu:enter()
+
+	--[[
+	set loveframe gamestate to menu
+
+	]]
+
 	love.graphics.setBackgroundColor(104, 136, 248)
 end
 

@@ -23,6 +23,13 @@ function game:init()
 
 end
 
+function game:enter()
+	--[[
+	loveframe
+	set loveframe gamestate to game
+	]]
+end
+
 function game:update(dt)
 
  -- local joysticks = love.joystick.getJoysticks()
