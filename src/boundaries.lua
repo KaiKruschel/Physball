@@ -1,4 +1,4 @@
-class = require "../lib/30log"
+class = require "../lib/30log/30log"
 Boundaries = class {}
 
 function Boundaries:__init(color)

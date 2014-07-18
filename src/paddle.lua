@@ -1,4 +1,4 @@
-class = require '../lib/30log'
+class = require "../lib/30log/30log"
 Paddle = class {}
 
 function Paddle:__init(player, color) -- screen_width and height are global and can be accessed
