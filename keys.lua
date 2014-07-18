@@ -14,6 +14,6 @@ function set_keyboard(t)
   t.p2.down     = "down"
   t.p2.left     = "left"
   t.p2.right    = "right"
-  t.p2.turn_ccw = "appback"
-  t.p2.turn_cw  = "appforward"
+  t.p2.turn_ccw = ","
+  t.p2.turn_cw  = "."
 end

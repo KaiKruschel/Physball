@@ -1,9 +1,10 @@
-Physball(workin title)
+Physball (working title)
 ======================
 
 ##Contents
 
 * Description
+* Controls
 * License
 
 
@@ -19,6 +20,12 @@ Also there will be powerups and nicer graphics.
 
 Be prepared.
 
+
+##Controls
+left player uses w, a, s, d for movement and q and e for rotation
+right player uses up, down, left, right for movement and , and . for rotation.
+
+The keys can be changed in the "keys.lua" file in the same directory that contains the "main.lua"
 
 ##Licence
 
