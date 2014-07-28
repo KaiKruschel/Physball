@@ -39,12 +39,13 @@ function Paddle:draw()
 end
 
 function Paddle:update()
-  self.angle = self.body.getAngle()
-  self.dir = (self.speed * math.cos(self.angle)), (self.speed * math.sin(self.angle))
+  self.angle = self.body:getAngle()
+  self.dir_x = (self.speed * math.cos(self.angle))
+  self.dir_y = (self.speed * math.sin(self.angle))
   if love.keyboard.isDown(self.keys.up) then
-    self.body:applyForce(self.dir)
+    self.body:applyForce(self.dir_x, self.dir_y)
   elseif love.keyboard.isDown(self.keys.down) then
-    self.body:applyForce(-self.dir)
+    self.body:applyForce(-self.dir_x, -self.dir_y)
   end
   if love.keyboard.isDown(self.keys.left) then
     self.body:applyTorque(-150000) -- twist it counter clockwise
