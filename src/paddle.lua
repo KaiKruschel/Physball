@@ -3,7 +3,7 @@ Paddle = class {}
 
 function Paddle:__init(player, color) -- screen_width and height are global and can be accessed
 
-  self.speed = 10
+  self.speed = 20000 
   self.width = screen_width / 40
   self.height = 2 * screen_height / 15
 
@@ -39,19 +39,16 @@ function Paddle:draw()
 end
 
 function Paddle:update()
+  self.angle = self.body.getAngle()
+  self.dir = (self.speed * math.cos(self.angle)), (self.speed * math.sin(self.angle))
   if love.keyboard.isDown(self.keys.up) then
-    self.body:applyForce(0, -20000)
+    self.body:applyForce(self.dir)
   elseif love.keyboard.isDown(self.keys.down) then
-    self.body:applyForce(0, 20000)
+    self.body:applyForce(-self.dir)
   end
   if love.keyboard.isDown(self.keys.left) then
-    self.body:applyForce(-20000, 0)
-  elseif love.keyboard.isDown(self.keys.right) then
-    self.body:applyForce(20000, 0)
-  end
-  if love.keyboard.isDown(self.keys.turn_ccw) then
     self.body:applyTorque(-150000) -- twist it counter clockwise
-  elseif love.keyboard.isDown(self.keys.turn_cw) then
+  elseif love.keyboard.isDown(self.keys.right) then
     self.body:applyTorque(150000) -- twist clockwise
   end
 end
