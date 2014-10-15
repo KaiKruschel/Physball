@@ -1,6 +1,7 @@
 function set_keyboard(t)
   -- Player 1
   t.p1 = {}
+  t.p1.controls = "normal"
   t.p1.up       = "w"
   t.p1.down     = "s"
   t.p1.left     = "a"
@@ -10,6 +11,7 @@ function set_keyboard(t)
 
   -- Player 2
   t.p2 = {}
+  t.p2.controls = "normal"
   t.p2.up       = "up"
   t.p2.down     = "down"
   t.p2.left     = "left"
